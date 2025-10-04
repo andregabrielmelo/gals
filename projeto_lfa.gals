@@ -14,6 +14,7 @@ Parser = SLR
 #Tokens
 :[\n\t\r\s]
 PRINT: Show
+LOG: Log
 VARIABLE: [a-zA-Z][a-zA-Z0-9]*
 NUMBER: [0-1]+
 EQUALS: =
@@ -22,7 +23,6 @@ SUBTRACTION: \-
 MULTIPLICATION: \* 
 DIVISION: /
 EXPONENTIATION: \*\*
-LOG: LOG
 OPEN_PARENTHESES: \(
 CLOSE_PARENTHESES: \)
 EOL: ;
