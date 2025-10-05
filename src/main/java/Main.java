@@ -1,33 +1,48 @@
+import java.io.StringReader;
+
 import gals.Lexico;
 import gals.Semantico;
 import gals.Sintatico;
 
-import java.io.StringReader;
-
 public class Main {
     public static void main(String[] args) {
-        try{
-            String test_log =
-                    "A=Log(100);" +
-                    "Show(A);";
-            String test_sum =
-                    "A=10+11;" +
-                    "Show(A);";
-            String test=
-                    "A=2**3;" + "Show(A);";
+        while (true) {
+            try {
+                Menu.exibirMenu();
+                int op = Menu.lerOpcao();
+                if (op == 0) {
+                    System.out.println("Saindo...");
+                    break;
+                }
+                if (op == 1) {
+                    Menu.rodarTestesGalsUnitTests();
+                    continue;
+                }
+                String exprParaParser = null;
+                if (op == 2) {
+                    Menu.ManualInput input = Menu.lerExpressaoManualComTipo();
+                    if (input.isBinario) {
+                        exprParaParser = input.expr;
+                    } else {
+                        exprParaParser = Menu.decimalParaBinario(input.expr);
+                    }
+                } else if (op == 3) {
+                    Menu.exibirOperacoesSuportadas();
+                    continue;
+                } else {
+                    System.out.println("Opção inválida.");
+                    continue;
+                }
 
-            Lexico lexico = new Lexico(
-                new StringReader(
-                    test
-                )
-            );
-
-            Sintatico sintatico = new Sintatico();
-            Semantico semantico = new Semantico();
-            sintatico.parse(lexico, semantico);
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
+                Lexico lexico = new Lexico(new StringReader(exprParaParser));
+                Sintatico sintatico = new Sintatico();
+                Semantico semantico = new Semantico();
+                sintatico.parse(lexico, semantico);
+                int resultado = semantico.getResultado();
+                Menu.mostrarResultado(resultado);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
