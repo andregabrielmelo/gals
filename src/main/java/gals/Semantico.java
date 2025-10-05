@@ -76,4 +76,8 @@ public class Semantico implements Constants {
                 break;
         }
     }
+
+    public int getResultado() {
+        return pilha.peek();
+    }
 }
