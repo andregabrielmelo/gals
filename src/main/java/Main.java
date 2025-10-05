@@ -1,5 +1,3 @@
-package org.example;
-
 import gals.Lexico;
 import gals.Semantico;
 import gals.Sintatico;
@@ -15,10 +13,12 @@ public class Main {
             String test_sum =
                     "A=10+11;" +
                     "Show(A);";
+            String test=
+                    "A=2**3;" + "Show(A);";
 
             Lexico lexico = new Lexico(
                 new StringReader(
-                    test_sum
+                    test
                 )
             );
 
